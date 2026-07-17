@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Uma perguntinha pra você 💛</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#2a0a1e">
+<meta name="robots" content="noindex">
+<style>
+  /* =========================================================
+     PEDIDO DE NAMORO — experiência mobile, tela por tela.
+     Mundo visual único (crepúsculo quente): decisão deliberada.
+     Autocontido: pode hospedar em qualquer VPS (só servir o arquivo).
+     ========================================================= */
+  :root{
+    --wine:#2a0a1e;
+    --wine-2:#4a0f2c;
+    --plum:#6e1440;
+    --rose:#ff5d7d;
+    --rose-soft:#ff9bb0;
+    --coral:#ff8a5c;
+    --gold:#ffd6a0;
+    --cream:#fff2ec;
+    --shadow:0 18px 40px -12px rgba(20,2,12,.55);
+    --font-display:Georgia,'Times New Roman',serif;
+    --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:var(--font-body);
+    color:var(--cream);
+    background:
+      radial-gradient(120% 80% at 50% -10%, #7a1746 0%, transparent 55%),
+      radial-gradient(130% 90% at 50% 110%, #ff8a5c22 0%, transparent 45%),
+      linear-gradient(180deg, var(--wine) 0%, var(--wine-2) 55%, var(--plum) 100%);
+    background-attachment:fixed;
+    min-height:100dvh;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    -webkit-user-select:none;user-select:none;
+  }
+  #hearts{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .stage{
+    position:relative;z-index:2;
+    width:100%;max-width:460px;
+    min-height:100dvh;
+    padding:calc(env(safe-area-inset-top) + 28px) 26px calc(env(safe-area-inset-bottom) + 34px);
+    display:flex;flex-direction:column;
+  }
+
+  .dots{display:flex;gap:8px;justify-content:center;margin-bottom:8px;min-height:8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:#ffffff2e;transition:all .4s ease}
+  .dot.on{background:var(--rose);box-shadow:0 0 10px var(--rose);transform:scale(1.25)}
+
+  .screen{
+    flex:1;display:none;flex-direction:column;justify-content:center;
+    text-align:center;gap:22px;
+    animation:rise .55s cubic-bezier(.2,.9,.25,1) both;
+  }
+  .screen.active{display:flex}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;opacity:.9;
+  }
+  h1,h2{font-family:var(--font-display);font-weight:400;line-height:1.12;text-wrap:balance}
+  h1{font-size:clamp(2.1rem,9vw,2.9rem);font-style:italic}
+  h2{font-size:clamp(1.65rem,7.4vw,2.25rem)}
+  .lead{font-size:1.02rem;line-height:1.6;color:#ffe6dd;opacity:.92;text-wrap:pretty}
+  .emoji{font-size:2.6rem;line-height:1}
+
+  .opts{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+  button{font-family:inherit;cursor:pointer;border:none;color:inherit;font-size:1rem}
+  .opt{
+    background:#ffffff12;border:1px solid #ffffff26;color:var(--cream);
+    padding:16px 18px;border-radius:16px;font-size:1.02rem;font-weight:500;
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    transition:transform .15s ease,background .2s ease,border-color .2s ease;
+    text-align:center;
+  }
+  .opt:active{transform:scale(.97);background:#ffffff22;border-color:var(--rose-soft)}
+
+  .cta{
+    background:linear-gradient(135deg,var(--rose),var(--coral));
+    color:#fff;font-weight:700;font-size:1.1rem;
+    padding:18px 22px;border-radius:18px;box-shadow:var(--shadow);
+    transition:transform .18s ease,box-shadow .2s ease;
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  .cta:active{transform:scale(.96)}
+  @keyframes pulse{0%,100%{box-shadow:0 12px 30px -10px rgba(255,93,125,.5)}50%{box-shadow:0 18px 44px -8px rgba(255,138,92,.7)}}
+
+  #arena{position:relative;min-height:220px;margin-top:6px}
+  .answers{display:flex;flex-direction:column;gap:14px;align-items:center}
+  #btnSim{
+    background:linear-gradient(135deg,var(--rose),var(--coral));
+    color:#fff;font-weight:800;border-radius:20px;box-shadow:var(--shadow);
+    padding:20px 30px;font-size:1.25rem;transition:transform .25s cubic-bezier(.2,1.4,.4,1);
+    z-index:3;
+  }
+  #btnSim:active{transform:scale(.95)}
+  #btnNao{
+    background:#ffffff16;border:1px solid #ffffff2e;color:#ffd6c8;
+    padding:14px 26px;border-radius:20px;font-weight:600;font-size:1rem;
+    transition:transform .18s ease, top .28s cubic-bezier(.2,.9,.3,1), left .28s cubic-bezier(.2,.9,.3,1), width .3s, height .3s, opacity .3s, font-size .3s;
+    position:relative;
+  }
+  #btnNao.loose{position:absolute}
+  .nagline{min-height:1.4em;font-size:.92rem;color:var(--rose-soft);font-weight:600;text-wrap:balance}
+
+  #win .bigheart{font-size:4.6rem;animation:beat 1s ease-in-out infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.22)}30%{transform:scale(1)}45%{transform:scale(1.16)}}
+  #win h1{background:linear-gradient(120deg,var(--gold),var(--rose-soft),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .signoff{font-family:var(--font-display);font-style:italic;font-size:1.15rem;color:var(--gold)}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.05ms!important}
+  }
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:14px}
+</style>
+</head>
+<body>
+
+<canvas id="hearts"></canvas>
+
+<main class="stage">
+  <div class="dots" id="dots"></div>
+
+  <!-- 0 · abertura -->
+  <section class="screen active" data-step>
+    <h1>Oi, guarda fafada</h1>
+    <p class="lead">achou uma coisinha escondida né?!</p>
+    <div class="opts">
+      <button class="cta" data-next>bora começar? ✨</button>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section class="screen" data-step>
+    <div class="emoji">😏</div>
+    <h2>Primeira pergunta séria:</h2>
+    <p class="lead">Você faz ideia de como tá linda hoje?</p>
+    <div class="opts">
+      <button class="opt" data-next>Sempre estou 💁‍♀️</button>
+      <button class="opt" data-next>Óbvio que sim</button>
+      <button class="opt" data-next>Ain, para 🙈</button>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="screen" data-step>
+    <div class="emoji">💭</div>
+    <h2>De 0 a 10…</h2>
+    <p class="lead">quanto você acha que eu te amo?</p>
+    <div class="opts">
+      <button class="opt" data-next>10, claro</button>
+      <button class="opt" data-next>Mil 🚀</button>
+      <button class="opt" data-next>Não existe número pra isso 💗</button>
+    </div>
+  </section>
+
+  <!-- 3 · respira -->
+  <section class="screen" data-step>
+    <div class="emoji">🌙</div>
+    <div class="eyebrow">chega de enrolação</div>
+    <h2>Então… respira fundo.</h2>
+    <p class="lead">Tem uma última pergunta. E dessa vez é de verdade.</p>
+    <div class="opts">
+      <button class="cta" data-next>Tô pronta 💓</button>
+    </div>
+  </section>
+
+  <!-- 4 · A PERGUNTA -->
+  <section class="screen" data-step id="ask">
+    <div class="emoji">❤️</div>
+    <div class="eyebrow">a pergunta</div>
+    <h1>Quer namorar comigo?</h1>
+    <p class="nagline" id="nag">(pode pensar… mas já sei a resposta 😌)</p>
+    <div id="arena">
+      <div class="answers">
+        <button id="btnSim">SIM 💍</button>
+        <button id="btnNao">não</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · recuperação do "não" -->
+  <section class="screen" data-step id="oops">
+    <div class="emoji">🥺</div>
+    <h2>Peraí… acho que você clicou errado</h2>
+    <p class="lead">Tenho quase certeza que você quis dizer <strong>SIM</strong>, né? O botão até tremeu de nervoso.</p>
+    <div class="opts">
+      <button class="cta" id="backToAsk">Deixa eu tentar de novo 🙈</button>
+    </div>
+  </section>
+
+  <!-- 6 · celebração -->
+  <section class="screen" data-step id="win">
+    <div class="bigheart">💖</div>
+    <div class="eyebrow">era isso que eu queria ouvir</div>
+    <h1>Ela disse SIM!</h1>
+    <p class="lead">Agora é oficial, e não tem mais volta 😌 Prometo cuidar de você, te fazer rir e dividir todas as pizzas.</p>
+    <p class="signoff">te amo — seu, pra sempre 🤍</p>
+    <div class="opts">
+      <button class="opt" id="again">viver isso de novo 🔁</button>
+    </div>
+  </section>
+</main>
+
+<script>
+  const steps = [...document.querySelectorAll('[data-step]')];
+  const dotsWrap = document.getElementById('dots');
+  // bolinhas de progresso para as telas 0..4 (fluxo linear até a pergunta)
+  const FLOW = 5;
+  for (let i=0;i<FLOW;i++){const d=document.createElement('span');d.className='dot';dotsWrap.appendChild(d);}
+  const dots = [...dotsWrap.children];
+
+  let current = 0;
+  function show(i){
+    steps[current].classList.remove('active');
+    current = i;
+    steps[current].classList.add('active');
+    dots.forEach((d,k)=>d.classList.toggle('on', k<=current && current<FLOW));
+    dotsWrap.style.visibility = current<FLOW ? 'visible':'hidden';
+  }
+  show(0);
+
+  document.querySelectorAll('[data-next]').forEach(b=>{
+    b.addEventListener('click',()=>show(Math.min(current+1, FLOW-1)));
+  });
+
+  /* ---------- pergunta final: o "não" foge ---------- */
+  const ask   = document.getElementById('ask');
+  const arena = document.getElementById('arena');
+  const btnSim= document.getElementById('btnSim');
+  const btnNao= document.getElementById('btnNao');
+  const nag   = document.getElementById('nag');
+
+  const nags = [
+    "Tem certeza? 👀",
+    "Pensa com carinho…",
+    "Sério mesmo? 🥺",
+    "Esse botão não quer ser clicado",
+    "Ele foge de você, viu? 😌",
+    "O SIM tá enorme por um motivo…",
+    "Vai por mim: clica no verdinho ❤️",
+    "Tá difícil pra você e pra ele 😅",
+  ];
+  let dodges = 0;
+  let simScale = 1;
+
+  function moveNao(){
+    dodges++;
+    if(!btnNao.classList.contains('loose')){
+      btnNao.classList.add('loose');
+      arena.style.height = arena.offsetHeight + 'px';
+    }
+    const pad = 6;
+    const w = btnNao.offsetWidth, h = btnNao.offsetHeight;
+    const maxX = Math.max(pad, arena.clientWidth  - w - pad);
+    const maxY = Math.max(pad, arena.clientHeight - h - pad);
+    const rx = (Math.sin(dodges*12.9898)*43758.5453)%1;
+    const ry = (Math.sin(dodges*78.233 )*12345.6789)%1;
+    const x = Math.abs(rx)*maxX;
+    const y = Math.abs(ry)*maxY;
+    btnNao.style.left = x + 'px';
+    btnNao.style.top  = y + 'px';
+
+    const shrink = Math.max(.45, 1 - dodges*0.09);
+    btnNao.style.transform = 'scale('+shrink+')';
+    btnNao.style.opacity = Math.max(.35, 1 - dodges*0.08);
+    simScale = Math.min(1.6, simScale + 0.07);
+    btnSim.style.transform = 'scale('+simScale+')';
+
+    nag.textContent = nags[Math.min(dodges-1, nags.length-1)];
+  }
+
+  btnNao.addEventListener('pointerenter', moveNao);
+  btnNao.addEventListener('pointerdown', e=>{ e.preventDefault(); moveNao(); });
+  btnNao.addEventListener('click', e=>{ e.preventDefault(); show(steps.indexOf(document.getElementById('oops'))); });
+
+  document.getElementById('backToAsk').addEventListener('click',()=>{
+    btnNao.classList.remove('loose');
+    btnNao.style.cssText = '';
+    arena.style.height = '';
+    show(steps.indexOf(ask));
+    nag.textContent = "(dessa vez vai… 😌)";
+  });
+
+  btnSim.addEventListener('click',()=>{
+    show(steps.indexOf(document.getElementById('win')));
+    celebrate();
+  });
+
+  document.getElementById('again').addEventListener('click',()=>{
+    dodges=0;simScale=1;
+    btnNao.classList.remove('loose');btnNao.style.cssText='';btnSim.style.transform='';
+    arena.style.height='';nag.textContent="(pode pensar… mas já sei a resposta 😌)";
+    stopCelebrate();
+    show(0);
+  });
+
+  /* ---------- corações no fundo + confete de celebração ---------- */
+  const cv = document.getElementById('hearts');
+  const ctx = cv.getContext('2d');
+  let W,H,DPR;
+  function resize(){
+    DPR = Math.min(2, window.devicePixelRatio||1);
+    W = cv.width = innerWidth*DPR; H = cv.height = innerHeight*DPR;
+    cv.style.width=innerWidth+'px'; cv.style.height=innerHeight+'px';
+  }
+  resize(); addEventListener('resize',resize);
+
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function heart(x,y,s,rot,color,alpha){
+    ctx.save();ctx.translate(x,y);ctx.rotate(rot);ctx.scale(s,s);ctx.globalAlpha=alpha;
+    ctx.beginPath();
+    ctx.moveTo(0,0);
+    ctx.bezierCurveTo(0,-3,-5,-5,-5,-1);
+    ctx.bezierCurveTo(-5,3,0,5,0,8);
+    ctx.bezierCurveTo(0,5,5,3,5,-1);
+    ctx.bezierCurveTo(5,-5,0,-3,0,0);
+    ctx.closePath();ctx.fillStyle=color;ctx.fill();
+    ctx.restore();
+  }
+
+  const amb = [];
+  const palette = ['#ff5d7d','#ff9bb0','#ff8a5c','#ffd6a0'];
+  for(let i=0;i<(reduce?0:16);i++){
+    amb.push({x:Math.abs(Math.sin(i*3.1)*0.99)*innerWidth, y:innerHeight+Math.abs(Math.sin(i*7.7))*innerHeight,
+      s:(0.8+Math.abs(Math.sin(i))*1.6), sp:0.25+Math.abs(Math.sin(i*2.2))*0.5,
+      sw:0.5+Math.abs(Math.sin(i*1.3)), ph:i, col:palette[i%palette.length]});
+  }
+
+  let boom = [];
+  function celebrate(){
+    if(reduce) return;
+    boom = [];
+    for(let i=0;i<90;i++){
+      const a = (i/90)*Math.PI*2;
+      const v = 3+ (i%7);
+      boom.push({
+        x:innerWidth/2*DPR, y:innerHeight*0.32*DPR,
+        vx:Math.cos(a)*v*DPR*(1+ (i%3)*0.4),
+        vy:Math.sin(a)*v*DPR - 4*DPR,
+        s:(1.4+(i%4)*0.7), rot:a, vr:(i%2?0.12:-0.12),
+        col:palette[i%palette.length], life:1
+      });
+    }
+  }
+  function stopCelebrate(){ boom=[]; }
+
+  let t=0;
+  function loop(){
+    t++;
+    ctx.clearRect(0,0,W,H);
+    for(const p of amb){
+      p.y -= p.sp*DPR; p.x += Math.sin((t*0.01)+p.ph)*p.sw*0.3*DPR;
+      if(p.y < -20*DPR){ p.y = H + 20*DPR; }
+      heart(p.x, p.y, p.s*DPR*0.9, Math.sin(t*0.01+p.ph)*0.3, p.col, 0.35);
+    }
+    for(const c of boom){
+      c.vy += 0.12*DPR; c.x+=c.vx; c.y+=c.vy; c.rot+=c.vr; c.life-=0.006;
+      if(c.life>0) heart(c.x,c.y,c.s*DPR,c.rot,c.col,Math.max(0,c.life));
+    }
+    boom = boom.filter(c=>c.life>0 && c.y<H+40*DPR);
+    requestAnimationFrame(loop);
+  }
+  loop();
+</script>
+</body>
+</html>
