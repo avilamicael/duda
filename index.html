@@ -153,14 +153,14 @@
   </section>
 
   <!-- 2 -->
-  <section class="screen" data-step>
+  <section class="screen" data-step id="nota">
     <div class="emoji">💭</div>
     <h2>De 0 a 10…</h2>
-    <p class="lead">quanto você acha que eu te amo?</p>
+    <p class="lead" id="notaLead">quanto você acha que eu te amo?</p>
     <div class="opts">
-      <button class="opt" data-next>10, claro</button>
-      <button class="opt" data-next>Mil 🚀</button>
-      <button class="opt" data-next>Não existe número pra isso 💗</button>
+      <button class="opt" data-nota="só 10? consigo muuuito mais que isso 😤">10, claro</button>
+      <button class="opt" data-nota="mil é bonito… mas ainda tá curto 😏">Mil 🚀</button>
+      <button class="opt" data-right>Não existe número pra isso 💗</button>
     </div>
   </section>
 
@@ -205,7 +205,7 @@
     <div class="eyebrow">era isso que eu queria</div>
     <h1>Ela disse SIM!</h1>
     <p class="lead">Prometo cuidar de você!</p>
-    <p class="signoff">te amo 🤍</p>
+    <p class="signoff">te amo 💙</p>
   </section>
 </main>
 
@@ -231,6 +231,23 @@
     b.addEventListener('click',()=>show(Math.min(current+1, FLOW-1)));
   });
 
+  /* ---------- tela da nota: só "não existe número" avança ---------- */
+  document.querySelectorAll('#nota .opt').forEach(b=>{
+    b.addEventListener('click',()=>{
+      if(b.hasAttribute('data-right')){
+        show(Math.min(current+1, FLOW-1));
+        return;
+      }
+      b.animate?.(
+        [{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(0)'}],
+        {duration:300,easing:'ease-in-out'}
+      );
+      b.style.opacity='.45';
+      b.disabled=true;
+      document.getElementById('notaLead').textContent = b.dataset.nota;
+    });
+  });
+
   /* ---------- pergunta final: o "não" foge ---------- */
   const ask   = document.getElementById('ask');
   const arena = document.getElementById('arena');
@@ -242,7 +259,7 @@
     "Tem certeza? 👀",
     "Pensa com carinho…",
     "Sério mesmo? 🥺",
-    "Esse botão não quer ser clicado",
+    "esse botão some quando você chega perto 😌",
     "Ele foge de você, viu? 😌",
     "O SIM tá enorme por um motivo…",
     "Vai por mim: clica no verdinho ❤️",
