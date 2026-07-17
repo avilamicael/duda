@@ -202,13 +202,10 @@
   <!-- 6 · celebração -->
   <section class="screen" data-step id="win">
     <div class="bigheart">💖</div>
-    <div class="eyebrow">era isso que eu queria ouvir</div>
+    <div class="eyebrow">era isso que eu queria</div>
     <h1>Ela disse SIM!</h1>
-    <p class="lead">Agora é oficial, e não tem mais volta 😌 Prometo cuidar de você, te fazer rir e dividir todas as pizzas.</p>
-    <p class="signoff">te amo — seu, pra sempre 🤍</p>
-    <div class="opts">
-      <button class="opt" id="again">viver isso de novo 🔁</button>
-    </div>
+    <p class="lead">Prometo cuidar de você!</p>
+    <p class="signoff">te amo 🤍</p>
   </section>
 </main>
 
@@ -295,14 +292,6 @@
   btnSim.addEventListener('click',()=>{
     show(steps.indexOf(document.getElementById('win')));
     celebrate();
-  });
-
-  document.getElementById('again').addEventListener('click',()=>{
-    dodges=0;simScale=1;
-    btnNao.classList.remove('loose');btnNao.style.cssText='';btnSim.style.transform='';
-    arena.style.height='';nag.textContent="(pode pensar… mas já sei a resposta 😌)";
-    stopCelebrate();
-    show(0);
   });
 
   /* ---------- corações no fundo + confete de celebração ---------- */
