@@ -2,16 +2,11 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Uma perguntinha pra você 💛</title>
+<title>Pra você, antes do primeiro dia 💛</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#2a0a1e">
 <meta name="robots" content="noindex">
 <style>
-  /* =========================================================
-     PEDIDO DE NAMORO — experiência mobile, tela por tela.
-     Mundo visual único (crepúsculo quente): decisão deliberada.
-     Autocontido: pode hospedar em qualquer VPS (só servir o arquivo).
-     ========================================================= */
   :root{
     --wine:#2a0a1e;
     --wine-2:#4a0f2c;
@@ -76,15 +71,6 @@
 
   .opts{display:flex;flex-direction:column;gap:12px;margin-top:6px}
   button{font-family:inherit;cursor:pointer;border:none;color:inherit;font-size:1rem}
-  .opt{
-    background:#ffffff12;border:1px solid #ffffff26;color:var(--cream);
-    padding:16px 18px;border-radius:16px;font-size:1.02rem;font-weight:500;
-    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-    transition:transform .15s ease,background .2s ease,border-color .2s ease;
-    text-align:center;
-  }
-  .opt:active{transform:scale(.97);background:#ffffff22;border-color:var(--rose-soft)}
-
   .cta{
     background:linear-gradient(135deg,var(--rose),var(--coral));
     color:#fff;font-weight:700;font-size:1.1rem;
@@ -131,61 +117,57 @@
 <main class="stage">
   <div class="dots" id="dots"></div>
 
-  <!-- 0 · abertura -->
-  <section class="screen active" data-step>
-    <h1>Oi, guarda fafada</h1>
-    <p class="lead">achou uma coisinha escondida né?!</p>
-    <div class="opts">
-      <button class="cta" data-next>bora começar? ✨</button>
-    </div>
-  </section>
-
-  <!-- 1 -->
-  <section class="screen" data-step>
-    <div class="emoji">😏</div>
-    <h2>Primeira pergunta séria:</h2>
-    <p class="lead">Você faz ideia de como tá linda hoje?</p>
-    <div class="opts">
-      <button class="opt" data-next>Sempre estou 💁‍♀️</button>
-      <button class="opt" data-next>Óbvio que sim</button>
-      <button class="opt" data-next>Ain, para 🙈</button>
-    </div>
-  </section>
-
-  <!-- 2 -->
-  <section class="screen" data-step id="nota">
-    <div class="emoji">💭</div>
-    <h2>De 0 a 10…</h2>
-    <p class="lead" id="notaLead">quanto você acha que eu te amo?</p>
-    <div class="opts">
-      <button class="opt" data-nota="só 10? consigo muuuito mais que isso 😤">10, claro</button>
-      <button class="opt" data-nota="mil é bonito… mas ainda tá curto 😏">Mil 🚀</button>
-      <button class="opt" data-right>Não existe número pra isso 💗</button>
-    </div>
-  </section>
-
-  <!-- 3 · respira -->
-  <section class="screen" data-step>
-    <div class="emoji">🌙</div>
-    <div class="eyebrow">chega de enrolação</div>
-    <h2>Então… respira fundo.</h2>
-    <p class="lead">Tem uma última pergunta. E dessa vez é de verdade.</p>
-    <div class="opts">
-      <button class="cta" data-next>Tô pronta 💓</button>
-    </div>
-  </section>
-
-  <!-- 4 · A PERGUNTA -->
-  <section class="screen" data-step id="ask">
-    <div class="emoji">❤️</div>
-    <div class="eyebrow">a pergunta</div>
-    <h1>Quer namorar comigo?</h1>
-    <p class="nagline" id="nag">(pode pensar… mas já sei a resposta 😌)</p>
+  <!-- 0 · abertura + pergunta (sim fixo / não foge) -->
+  <section class="screen active" data-step id="ask">
+    <div class="emoji">👀</div>
+    <div class="eyebrow">oi, ansiosinha</div>
+    <h1>Está preparada para o novo trabalho?</h1>
+    <p class="nagline" id="nag">(pode fingir dúvida… mas já sei a resposta 😌)</p>
     <div id="arena">
       <div class="answers">
         <button id="btnSim">SIM 💍</button>
-        <button id="btnNao">não</button>
+        <button id="btnNao">acho que não</button>
       </div>
+    </div>
+  </section>
+
+  <!-- 1 · resposta à confirmação -->
+  <section class="screen" data-step>
+    <div class="emoji">😏</div>
+    <h2>Que bom!</h2>
+    <p class="lead">eu também estou contando com isso. Não vejo a hora da minha servidora pública começar a usufruir do estado.</p>
+    <div class="opts">
+      <button class="cta" data-next>continua 👉</button>
+    </div>
+  </section>
+
+  <!-- 2 · pausa -->
+  <section class="screen" data-step>
+    <div class="emoji">🌙</div>
+    <div class="eyebrow">pausa</div>
+    <h2>Respira fundo.</h2>
+    <p class="lead">Tenho mais algumas coisas pra te dizer antes de você ir.</p>
+    <div class="opts">
+      <button class="cta" data-next>pode falar 💓</button>
+    </div>
+  </section>
+
+  <!-- 3 · você vai ser incrível -->
+  <section class="screen" data-step>
+    <div class="emoji">✨</div>
+    <h2>Você vai ser incrível. Como sempre.</h2>
+    <div class="opts">
+      <button class="cta" data-next>continua 👉</button>
+    </div>
+  </section>
+
+  <!-- 4 · brincadeira final antes do fechamento -->
+  <section class="screen" data-step>
+    <div class="emoji">🙄</div>
+    <h2>É ansiedade, eu sei</h2>
+    <p class="lead">mas não precisa brigar comigo o tempo todo 😅</p>
+    <div class="opts">
+      <button class="cta" data-next>tá bom, última tela 👉</button>
     </div>
   </section>
 
@@ -193,7 +175,7 @@
   <section class="screen" data-step id="oops">
     <div class="emoji">🥺</div>
     <h2>Peraí… acho que você clicou errado</h2>
-    <p class="lead">Tenho quase certeza que você quis dizer <strong>SIM</strong>, né? O botão até tremeu de nervoso.</p>
+    <p class="lead">Tenho certeza que você quis dizer <strong>SIM</strong>, né? O botão até fugiu de nervoso.</p>
     <div class="opts">
       <button class="cta" id="backToAsk">Deixa eu tentar de novo 🙈</button>
     </div>
@@ -212,17 +194,17 @@
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#blueheart)"/>
       </svg>
     </div>
-    <div class="eyebrow">era isso que eu queria</div>
-    <h1>Ela disse SIM!</h1>
-    <p class="lead">Prometo cuidar de você!</p>
-    <p class="signoff">te amo 🤍</p>
+    <div class="eyebrow">era isso que eu queria dizer</div>
+    <h1>Bom trabalho, amor!</h1>
+    <p class="lead">Você é demais. Eu acredito em você mais do que você acredita em você mesma.</p>
+    <p class="signoff">Te amo 🤍</p>
   </section>
 </main>
 
 <script>
   const steps = [...document.querySelectorAll('[data-step]')];
   const dotsWrap = document.getElementById('dots');
-  // bolinhas de progresso para as telas 0..4 (fluxo linear até a pergunta)
+  // bolinhas de progresso para as telas 0..4 (fluxo linear até o fechamento)
   const FLOW = 5;
   for (let i=0;i<FLOW;i++){const d=document.createElement('span');d.className='dot';dotsWrap.appendChild(d);}
   const dots = [...dotsWrap.children];
@@ -241,24 +223,7 @@
     b.addEventListener('click',()=>show(Math.min(current+1, FLOW-1)));
   });
 
-  /* ---------- tela da nota: só "não existe número" avança ---------- */
-  document.querySelectorAll('#nota .opt').forEach(b=>{
-    b.addEventListener('click',()=>{
-      if(b.hasAttribute('data-right')){
-        show(Math.min(current+1, FLOW-1));
-        return;
-      }
-      b.animate?.(
-        [{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(0)'}],
-        {duration:300,easing:'ease-in-out'}
-      );
-      b.style.opacity='.45';
-      b.disabled=true;
-      document.getElementById('notaLead').textContent = b.dataset.nota;
-    });
-  });
-
-  /* ---------- pergunta final: o "não" foge ---------- */
+  /* ---------- pergunta inicial: o "não" foge ---------- */
   const ask   = document.getElementById('ask');
   const arena = document.getElementById('arena');
   const btnSim= document.getElementById('btnSim');
@@ -317,8 +282,15 @@
   });
 
   btnSim.addEventListener('click',()=>{
-    show(steps.indexOf(document.getElementById('win')));
-    celebrate();
+    show(Math.min(current+1, FLOW-1));
+  });
+
+  /* ---------- última tela do fluxo avança pra celebração ---------- */
+  steps[FLOW-1].querySelectorAll('[data-next]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      show(steps.indexOf(document.getElementById('win')));
+      celebrate();
+    });
   });
 
   /* ---------- corações no fundo + confete de celebração ---------- */
@@ -370,7 +342,6 @@
       });
     }
   }
-  function stopCelebrate(){ boom=[]; }
 
   let t=0;
   function loop(){
